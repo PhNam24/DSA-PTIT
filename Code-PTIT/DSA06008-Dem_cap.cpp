@@ -15,19 +15,30 @@ int main ()
     cout.tie(NULL);
     test
     {
-        int n, m;
+        int n, m, cnt = 0;
         cin >> n >> m;
-        int a[n], b[m];
+        int a[n], b[m], d[10] = {};
         nhap(a);
-        nhap(b);
-        int cnt = 0;
-        for(int i : a)
+        for(int &i : b)
         {
-            for(int j : b)
+            cin >> i;
+            if(i < 5) d[i]++;
+        }
+        sort(b, b + n);
+        for(int i = 0; i < n; i++)
+        {
+            if(a[i] == 0) continue;
+            else if(a[i] == 1) cnt += d[0];
+            else if(a[i] == 2) cnt += m - d[2] - d[3] - d[4];
+            else if(a[i] == 3) cnt += m - d[3];
+            else if(a[i] == 4) cnt += m - d[2] - d[3] - d[4];
+            else
             {
-                if(j * log(i) > i * log(j)) cnt++;
+                int idx = upper_bound(b, b + n, a[i]) - b;
+                if(idx != m) cnt += m - idx;
+                cnt += d[0] + d[1];
             }
-        }  
+        }
         cout << cnt;
         cout << endl;
     }

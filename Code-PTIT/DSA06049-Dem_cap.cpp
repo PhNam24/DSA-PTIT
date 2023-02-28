@@ -18,14 +18,11 @@ int main ()
         int a[n];
         nhap(a);
         sort(a, a + n);
-        int cnt = 0, idx;
+        ll cnt = 0;
         for(int i = 0; i < n; i++)
         {
-           if (upper_bound(a,a + n, k + a[i])) 
-           {
-                idx = upper_bound(a,a + n, k + a[i]) - a;
-                cnt += n - idx;
-           }
+            int idx = lower_bound(a + i + 1, a + n, a[i] + k) - a - i - 1;
+            cnt += idx;
         }
         cout << cnt;
         cout << endl;

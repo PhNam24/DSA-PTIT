@@ -17,8 +17,25 @@ int main ()
         cin >> n;
         int a[n];
         nhap(a);
-        int l = 0, r = n - 1;
-        
+        int b[n];
+        b[n - 1] = a[n - 1];
+        for(int i = n - 2; i >= 0; i--)
+        {
+            b[i] = max(b[i + 1], a[i]);
+        }
+        int ans = -1;
+        int idxa = 0, idxb = 0;
+        while(idxa < n && idxb < n)
+        {
+            if(b[idxb] > a[idxa])
+            {
+                ans = max(ans, idxb - idxa);
+                idxb++;
+            }
+            else idxa++;
+        }
+        cout << ans;
+        cout << endl;
     }
     return 0;
 }
