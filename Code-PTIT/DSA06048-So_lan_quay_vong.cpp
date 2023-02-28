@@ -2,9 +2,11 @@
 #define ll long long
 #define endl '\n'
 #define test int t; cin >> t; while(t--)
-#define nhap(a) for ( int &i : a ) cin >> i
+#define nhap(a) for ( auto &i : a ) cin >> i
 
 using namespace std;
+
+int mod = 1e9 + 7;
 
 int main ()
 {
@@ -13,18 +15,19 @@ int main ()
     cout.tie(NULL);
     test
     {
-        int n, k;
-        cin >> n >> k;
-        int a[n + 5];
-        map<int, int> m;
-        ll cnt = 0;
+        int n;
+        cin >> n;
+        ll a[n], Min = 1e18, idx = 0;
         for(int i = 0; i < n; i++)
         {
             cin >> a[i];
-            cnt += m[k - a[i]];
-            m[a[i]]++;
+            if(Min > a[i])
+            {
+                Min = a[i];
+                idx = i;
+            }
         }
-        cout << cnt;
+        cout << idx;
         cout << endl;
     }
     return 0;

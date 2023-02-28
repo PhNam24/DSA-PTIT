@@ -2,7 +2,7 @@
     #define ll long long
     #define endl '\n'
     #define test int t; cin >> t; while(t--)
-    #define nhap(a) for ( int &i : a ) cin >> i
+    #define nhap(a) for ( auto &i : a ) cin >> i
 
     using namespace std;
 
@@ -16,36 +16,25 @@
             ll n1, n2, n3;
             cin >> n1 >> n2 >> n3;
             ll a[n1], b[n2], c[n3];
-            map<ll, ll> ma, mb, mc;
-            for(ll &i : a)
+            nhap(a);
+            nhap(b);
+            nhap(c);
+            multiset<ll> s;
+            int idxa = 0, idxb = 0, idxc = 0;
+            while(idxa < n1 && idxb < n2 && idxc < n3)
             {
-                cin >> i;
-                ma[i]++;
-            }
-            for(ll &i : b)
-            {
-                cin >> i;
-                mb[i]++;
-            }
-            for(ll &i : c)
-            {
-                cin >> i;
-                mc[i]++;
-            }
-            vector<ll> v;
-            for(ll i : a)
-            {
-                if (ma[i] && mb[i] && mc[i])
+                if(a[idxa] == b[idxb] && a[idxa] == c[idxc])
                 {
-                    ll tmp = min({ma[i], mb[i], mc[i]});
-                    while(tmp--)
-                    {
-                        v.push_back(i);
-                    }
-                    ma[i] = mb[i] = mc[i] = 0;
+                    s.insert(a[idxa]);
+                    idxa++;
+                    idxb++;
+                    idxc++;
                 }
+                else if(a[idxa] < b[idxb]) idxa++;
+                else if(b[idxb] < c[idxc]) idxb++;
+                else idxc++;
             }
-            if(v.size()) for(ll i : v) cout << i << " ";
+            if(s.size()) for(auto i : s) cout << i << " ";
             else cout << -1;
             cout << endl;
         }
