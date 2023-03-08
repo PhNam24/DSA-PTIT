@@ -7,27 +7,27 @@
 using namespace std;
 
 int mod = 1e9 + 7;
-int n, k, ans = 1e9, a[10], mark[10];
-string s[10];
+int n, k, ans = 1e9, a[15], mark[15];
+string s[15];
 
 void in()
 {
     int Min = 1e9, Max = -1e9;
-    string tmp[10];
+    string tmp[15];
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < k; j++)
         {
-            s[i][j] = tmp[i][a[j]];
+            tmp[i][j] = s[i][a[j]];
         }
     }
     for(int i = 0; i < n; i++)
     {
-        Min = min(Min, stoi(s[i]));
-        Max = max(Max, stoi(s[i]));
+        int tmp1 = stoi(tmp[i]);
+        Min = min(Min, tmp1);
+        Max = max(Max, tmp1);
     }
     ans = min(ans, Max - Min);
-    cout << Max << " " << Min << endl;
 }
 
 void Try(int i)
