@@ -15,42 +15,35 @@ int main ()
     cout.tie(NULL);
     test
     {
-        ll n, k;
+        int n, k;
         cin >> n >> k;
-        ll a[n];
-        int ans1 = -1e9;
-        int dp[n] = {};
+        int a[n];
         nhap(a);
-        // int cnt[n] = {};
-        // if(a[0] == k) cnt[0] = 1;
-        // for(int i = 1; i < n; i++)
-        // {
-        //     if(a[i] == k) cnt[i] = cnt[i - 1] + 1;
-        //     else cnt[i] = 0;
-        //     ans1 = max(ans1, cnt[i]);
-        // }
-        // cout << ans1 << endl;
-        if(a[0] == k) dp[0] = 1;
+        int g  = a[0];
+        if(a[0] == k) 
+        {
+            cout << 1 << endl;
+            continue;
+        }
+        int ans = 1e9;
         for(int i = 1; i < n; i++)
         {
-            if(__gcd(a[i], a[i - 1]) == k) 
+            if(g % k) g = a[i];
+            g = __gcd(g, a[i]);
+            if(g == k)
             {
-                if(!dp[i - 1]) dp[i - 1]++;
-                dp[i] = dp[i - 1] + 1;
+                int value = a[i], index = i;
+                if(a[i] == k)
+                {
+                    ans = 1;
+                    continue;
+                }
+                while(index < n)
+                {
+                    
+                }
             }
-            else dp[i] = 0; 
         }
-        int ans2 = 1e9;
-        for(int i = 0; i < n; i++)
-        {
-            if(a[i] < a[i - 1])
-            {
-                int tmp = a[i - 1];
-                ans2 = min(ans2, tmp);
-            }
-            cout << dp[i] << " ";
-        }
-        cout << endl;
     }
     return 0;
 }
