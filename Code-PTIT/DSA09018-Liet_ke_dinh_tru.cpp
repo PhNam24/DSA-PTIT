@@ -98,7 +98,7 @@ void dinhTru()
         visited[u] = 1;
         if(u == 1) DFS(2);
         else DFS(1);
-        for(i = 1 ; i <= n; i++ ) 
+        for(i = 1 ; i <= n; i++) 
         {
             if(!visited[i]) 
             {

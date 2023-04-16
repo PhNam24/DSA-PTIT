@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define endl '\n'
+#define test int t; cin >> t; while(t--)
+#define nhap(a) for ( auto &i : a ) cin >> i
+
+using namespace std;
+
+int mod = 1e9 + 7;
+
+int main ()
+{
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL);
+    string s;
+    cin >> s;
+    stack<pair<char, int>> st;
+    int cnt = 0, ans = 0;
+    for(int i = 0; i < s.size(); i++)
+    {
+        if(!st.empty() && ((s[i] == ')' && st.top().first == '(') || (s[i] == ']' && st.top().first == '[')))
+        {
+            st.pop();
+            if(!st.empty()) ans = max(ans, cnt - st.top().second);
+            else ans = cnt;
+        }
+        else 
+        {
+            if(s[i] == '[') cnt++;
+            st.push({s[i], cnt});
+        }
+    }
+    cout << ans;
+    return 0;
+}
