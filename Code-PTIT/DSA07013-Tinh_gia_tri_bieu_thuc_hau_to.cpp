@@ -8,14 +8,6 @@ using namespace std;
 
 int mod = 1e9 + 7;
 
-int ut(char c)
-{
-	if(c == '(') return 0;
-	if(c == '+' || c == '-') return 1;
-	if(c == '*' || c == '/') return 2;
-	return 3;
-} 
-
 int main ()
 {
     ios_base::sync_with_stdio(false); 
@@ -25,7 +17,7 @@ int main ()
     {
         string s;
         cin >> s;
-        stack<int > st;
+        stack<int> st;
         for(int i = 0; i < s.size(); i++)
         {
         	if(isdigit(s[i])) st.push(s[i] - '0');
