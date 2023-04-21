@@ -1,74 +1,68 @@
-    #include <bits/stdc++.h>
-    #define ll long long
-    #define endl '\n'
-    #define test int t; cin >> t; while(t--)
-    #define nhap(a) for ( auto &i : a ) cin >> i
+#include <bits/stdc++.h>
+#define ll long long
+#define endl '\n'
+#define test int t; cin >> t; while(t--)
+#define nhap(a) for ( auto &i : a ) cin >> i
 
-    using namespace std;
+using namespace std;
 
-    int mod = 1e9 + 7;
+int mod = 1e9 + 7;
 
-    int v, e, cnt = 0, visited[100], a[100], b[100][100];
+int n, m, check, visited[100];
+vector<int> ke[100];
 
-    void Hamilton(int i)
+void Hamilton(int u, int cnt)
+{
+    if(cnt == n)
     {
-        for(int j = 1; j <= v; j++)
-        {
-            if(b[a[i - 1]][j] && !visited[j])
-            {
-                a[i] = j;
-                visited[j] = 1;
-                if(i < v) Hamilton(i + 1);
-                else 
-                {
-                    cnt++;
-                }
-                visited[j] = 0;
-            }
-        }
+        check = 1;
+        return;
     }
-
-    void sol(int v0)
+    if(check) return;
+    for(int i : ke[u])
     {
-        for(int i = 1; i <= v; i++)
+        if(!visited[i])
         {
+            visited[i] = 1;
+            Hamilton(i, cnt + 1);
             visited[i] = 0;
         }
-        visited[v0] = 1;
-        a[1] = v0;
-        Hamilton(2);
     }
+}
 
-    int main ()
+
+int main ()
+{
+    ios_base::sync_with_stdio(false); 
+    cin.tie(NULL); 
+    cout.tie(NULL);
+    test
     {
-        ios_base::sync_with_stdio(false); 
-        cin.tie(NULL); 
-        cout.tie(NULL);
-        test
+        check = 0;
+        for(int i = 0; i < 100; i++)
         {
-            cnt = 0;
-            for(int i = 0 ; i < 100; i++)
+            visited[i] = 0;
+            ke[i].clear();
+        }
+        cin >> n >> m;
+        while(m--)
+        {
+            int x, y;
+            cin >> x >> y;
+            ke[x].push_back(y);
+            ke[y].push_back(x);
+        }
+        for(int i = 1; i <= n; i++)
+        {
+            for(int i = 0; i < 100; i++)
             {
                 visited[i] = 0;
-                for(int j = 0; j < 100; j++)
-                {
-                    b[i][j] = 0;
-                }
             }
-            cin >> v >> e;
-            int x, y;
-            while(e--)
-            {
-                cin >> x >> y;
-                b[x][y] = b[y][x] = 1;
-            }
-            for(int i = 1; i <= v; i++)
-            {
-                sol(i);
-            }
-            if(cnt) cout << 1;
-            else cout << 0;
-            cout << endl;
+            visited[i] = 1;
+            Hamilton(i, 1);
         }
-        return 0;
+        cout << check;
+        cout << endl;
     }
+    return 0;
+}

@@ -6,27 +6,20 @@
 
 using namespace std;
 
-int n, m, visited[1005], parent[1005];
-vector<int> ke[1005];
-
 int mod = 1e9 + 7;
+int n, m;
+vector<int> ke[100005];
 
-void DFS(int u)
+string solve()
 {
-    cout << u << " ";
-    visited[u] = 1;
-    for(int i : ke[u])
+    for(int i = 1; i <= n; i++)
     {
-        if(!visited[i])
+        for(int j : ke[i])
         {
-            parent[i] = u;
-            DFS(i);
-        }
-        else if(i == 1) 
-        {
-            return;
+            if(ke[i].size() != ke[j].size()) return "NO";
         }
     }
+    return "YES";
 }
 
 int main ()
@@ -36,6 +29,7 @@ int main ()
     cout.tie(NULL);
     test
     {
+        for(int i = 0; i < 100005; i++) ke[i].clear();
         cin >> n >> m;
         int x, y;
         while(m--)
@@ -44,8 +38,7 @@ int main ()
             ke[x].push_back(y);
             ke[y].push_back(x);
         }
-        DFS(1);
-        cout << 1;
+        cout << solve();
         cout << endl;
     }
     return 0;
