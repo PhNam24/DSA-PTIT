@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"array": "cpp",
+			"fstream": "cpp",
+			"future": "cpp",
+			"shared_mutex": "cpp",
+			"sstream": "cpp",
+			"thread": "cpp",
+			"tuple": "cpp",
+			"chrono": "cpp",
+			"random": "cpp",
+			"limits": "cpp",
+			"valarray": "cpp",
+			"new": "cpp"
+		}
+	}
+}
