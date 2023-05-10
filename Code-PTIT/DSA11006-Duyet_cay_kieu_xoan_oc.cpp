@@ -59,7 +59,7 @@ void buildTree(binTree &root, int n)
 
 void spiralOrder(binTree root)
 {
-     stack<binTree> st1, st2;
+    stack<binTree> st1, st2;
     st1.push(root);
     while(st1.size() || st2.size())
     {
