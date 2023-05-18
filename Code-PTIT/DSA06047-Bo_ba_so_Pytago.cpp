@@ -24,16 +24,19 @@ int main ()
         }
         sort(a, a + n);
         string s = "NO";
+        int check = 0;
         for(int i = 0; i < n; i++)
         {
             for(int j = i + 1; j < n; j++)
             {
                 if (binary_search(a, a + n, a[i] + a[j])) 
                 {
+                    check = 1;
                     s = "YES";
                     break;
                 }
             }
+            if(check) break;
         }
         cout << s;
         cout << endl;
