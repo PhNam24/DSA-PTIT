@@ -8,15 +8,9 @@ using namespace std;
 
 int mod = 1e9 + 7;
 
-int calcPrefix(string s)
+ll calcPrefix(vector<string> v)
 {
-    stack<int> st;
-    vector<string> v;
-    stringstream ss(s);
-    while(ss >> s)
-    {
-        v.push_back(s);
-    }
+    stack<ll> st;
     for(int i = v.size() - 1; i >= 0; i--)
     {
         if(v[i] != "+" && v[i] != "-" && v[i] != "*" && v[i] != "/") st.push(stoll(v[i]));
@@ -24,33 +18,33 @@ int calcPrefix(string s)
         {
             if(v[i] == "+")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp1 + tmp2);
             }
             if(v[i] == "-")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp1 - tmp2);
             }
             if(v[i] == "*")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp1 * tmp2);
             }
             if(v[i] == "/")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp1 / tmp2);
             }
@@ -59,15 +53,9 @@ int calcPrefix(string s)
     return st.top();
 }
 
-int calcPostfix(string s)
+ll calcPostfix(vector<string> v)
 {
-    stack<int> st;
-    vector<string> v;
-    stringstream ss(s);
-    while(ss >> s)
-    {
-        v.push_back(s);
-    }
+    stack<ll> st;
     for(int i = 0; i < v.size(); i++)
     {
         if(v[i] != "+" && v[i] != "-" && v[i] != "*" && v[i] != "/") st.push(stoll(v[i]));
@@ -75,33 +63,33 @@ int calcPostfix(string s)
         {
             if(v[i] == "+")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp2 + tmp1);
             }
             if(v[i] == "-")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp2 - tmp1);
             }
             if(v[i] == "*")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp2 * tmp1);
             }
             if(v[i] == "/")
             {
-                int tmp1 = st.top();
+                ll tmp1 = st.top();
                 st.pop();
-                int tmp2 = st.top();
+                ll tmp2 = st.top();
                 st.pop();
                 st.push(tmp2 / tmp1);
             }
@@ -119,11 +107,13 @@ int main ()
     {
         int n;
         cin >> n;
-        cin.ignore();
-        string s;
-        getline(cin, s);
-        if(isdigit(s[s.size() - 1])) cout << calcPrefix(s);
-        else cout << calcPostfix(s);
+        vector<string> v(n);
+        for(int i = 0; i < n; i++) 
+        {
+            cin >> v[i];
+        }
+        if(v[v.size() - 1] != "+" && v[v.size() - 1] != "-" && v[v.size() - 1] != "*" && v[v.size() - 1] != "/") cout << calcPrefix(v);
+        else cout << calcPostfix(v);
         cout << endl;
     }
     return 0;
